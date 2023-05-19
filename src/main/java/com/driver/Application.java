@@ -9,5 +9,4 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	Movie movie=new Movie("Harry",120,4.5);
 }
