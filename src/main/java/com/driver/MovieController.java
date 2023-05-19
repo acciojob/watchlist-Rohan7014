@@ -12,7 +12,7 @@ public class MovieController {
     @Autowired
     MovieService movieService;
     @PostMapping("/add-movie")
-    public ResponseEntity<String> addMovie(@RequestBody Movie movie){
+    public ResponseEntity<String> addMovie(@RequestBody() Movie movie){
         return new ResponseEntity<>(movieService.addMovie(movie),HttpStatus.CREATED);
     }
     @PostMapping("/add-director")
@@ -28,15 +28,15 @@ public class MovieController {
         return new ResponseEntity<>(movieService.getDirectorByName(director_name),HttpStatus.CREATED);
     }
     @GetMapping("/get-movie-by-director-name/{name}")
-    public ResponseEntity<List<String>> getMovieByDirectorName(@PathVariable String director_name){
+    public ResponseEntity<List<String>> getMoviesByDirectorName(@PathVariable String director_name){
         return new ResponseEntity<>(movieService.getMoviesByDirectorName(director_name),HttpStatus.CREATED);
     }
     @GetMapping("/get-all-movie")
-    public ResponseEntity<List<String>> getAllMovie(){
-        return new ResponseEntity<>(movieService.findAllMovies(),HttpStatus.CREATED);
+    public ResponseEntity<List<String>> findAllMovies(){
+        return new ResponseEntity<>(movieService.findAllMovies(), HttpStatus.CREATED);
     }
     @DeleteMapping("/delete-all-director")
-    public ResponseEntity<String> deleteAllDirector(){
+    public ResponseEntity<String> deleteAllDirectors(){
         return new ResponseEntity<>(movieService.deleteAllDirector(),HttpStatus.CREATED);
     }
     @DeleteMapping("/delete-director-by-name")
