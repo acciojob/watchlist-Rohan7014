@@ -24,7 +24,12 @@ public class MovieRepository {
     public Director getDirectorByName(String director_name){
         return director_database.get(director_name);
     }
-    public String addMovieDirectorPair(String movie_name,String director_name) throws NullPointerException{
+
+    public String addMovieDirectorPair() throws NullPointerException {
+        return addMovieDirectorPair(null, null);
+    }
+
+    public String addMovieDirectorPair(String movie_name, String director_name) throws NullPointerException{
         if(!director_movie_database.containsKey(director_name))
             director_movie_database.put(director_name,new ArrayList<Movie>());
         director_movie_database.get(director_name).add(getMovieByName(movie_name));
@@ -40,6 +45,11 @@ public class MovieRepository {
     public List<String> findAllMovies(){
         return new ArrayList<>(movie_database.keySet());
     }
+
+    public String deleteDirectorByName()throws NullPointerException {
+        return deleteDirectorByName(null);
+    }
+
     public String deleteDirectorByName(String director_name)throws NullPointerException{
         for(int i=0;i<director_database.size();i++){
             if(director_database.get(i).equals(director_name)) {
