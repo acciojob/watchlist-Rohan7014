@@ -9,22 +9,14 @@ import java.util.List;
 
 @Repository
 public class MovieRepository {
-    private HashMap<String,Movie> movie_database;
-    private HashMap<String,Director> director_database;
-    private HashMap<String, ArrayList<Movie>> director_movie_database;
-
-    public MovieRepository() {
-        movie_database=new HashMap<>();
-        director_database=new HashMap<>();
-        director_movie_database=new HashMap<>();
-    }
-    public String addMovie(Movie movie){
+    private HashMap<String,Movie> movie_database=new HashMap<>();
+    private HashMap<String,Director> director_database=new HashMap<>();
+    private HashMap<String, ArrayList<Movie>> director_movie_database=new HashMap<>();
+    public void addMovie(Movie movie){
         movie_database.put(movie.getName(),movie);
-        return "Movie Successfully Added";
     }
-    public String addDirector(Director director){
+    public void addDirector(Director director){
         director_database.put(director.getName(),director);
-        return "Director Added Successfully";
     }
     public Movie getMovieByName(String movie_name){
         return movie_database.get(movie_name);
@@ -32,11 +24,11 @@ public class MovieRepository {
     public Director getDirectorByName(String director_name){
         return director_database.get(director_name);
     }
-    public String addMovieDirectorPair(String movie_name,String director_name){
+    public String addMovieDirectorPair(String movie_name,String director_name) throws NullPointerException{
         if(!director_movie_database.containsKey(director_name))
             director_movie_database.put(director_name,new ArrayList<Movie>());
         director_movie_database.get(director_name).add(getMovieByName(movie_name));
-        return "Director with Movie pair is Created";
+        return "Success";
     }
     public List<String> getMoviesByDirectorName(String director_name){
         List<String> movie_list=new ArrayList<>();
@@ -49,20 +41,17 @@ public class MovieRepository {
         return new ArrayList<>(movie_database.keySet());
     }
     public String deleteDirectorByName(String director_name)throws NullPointerException{
-        for(Movie movie:director_movie_database.get(director_name))
-            movie_database.remove(movie.getName());
-        director_movie_database.remove(director_name);
-        director_database.remove(director_name);
-        return "Director Name Deleted";
+        for(int i=0;i<director_database.size();i++){
+            if(director_database.get(i).equals(director_name)) {
+                director_database.remove(director_name);
+                break;
+            }
+        }
+        return "Success";
     }
     public String deleteAllDirector(){
-        for(String director_name:director_database.keySet()){
-            for(Movie movie:director_movie_database.get(director_name)){
-                movie_database.remove(movie.getName());
-            }
-            director_movie_database.clear();
-        }
         director_database.clear();
-        return "All Directors Deleted";
+        director_movie_database.clear();
+        return "Success";
     }
 }
