@@ -25,7 +25,7 @@ public class MovieRepository {
         return director_database.get(director_name);
     }
     public void addMovieDirectorPair(String movie_name, String director_name) throws NullPointerException{
-        List<String> movieList =new ArrayList<>();
+        List<String> movieList =new ArrayList<String>();
         if(director_movie_database.containsKey(director_name))
             movieList=director_movie_database.get(director_name);
         if(!movie_database.containsKey(movie_name))
@@ -41,7 +41,7 @@ public class MovieRepository {
         if(director_movie_database.containsKey(director_name))
             movie_list=director_movie_database.get(director_name);
         return movie_list;
-//        for(Movie movie:director_movie_database.get(director_name)){
+//        for(Movie:director_movie_database.get(director_name)){
 //            movie_list.add(movie.getName());
 //        }
 //        return movie_list;
